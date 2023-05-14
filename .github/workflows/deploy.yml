@@ -54,11 +54,16 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            echo REVIEW_BOT_DB_USER = ${{ secrets.TELEGRAM_BOT_DB_USER }} >> review-bot-env.txt
-            echo REVIEW_BOT_DB_PASSWORD = ${{ secrets.TELEGRAM_BOT_DB_PASSWORD }} >> review-bot-env.txt
-            echo REVIEW_BOT_DB_PORT = 5432 >> review-bot-env.txt
-            echo REVIEW_BOT_DB_HOST = telegram-bot-db >> review-bot-env.txt
-            echo REVIEW_BOT_TOKEN = ${{ secrets.TELEGRAM_BOT_TOKEN }} >> review-bot-env.txt
+            echo REVIEW_BOT_DB = ${{ secrets.REVIEW_BOT_DB }} >> review-bot-env.txt
+            echo REVIEW_BOT_DB_USER = ${{ secrets.REVIEW_BOT_DB_USER }} >> review-bot-env.txt
+            echo REVIEW_BOT_DB_PASSWORD = ${{ secrets.REVIEW_BOT_DB_PASSWORD }} >> review-bot-env.txt
+            echo REVIEW_BOT_PORT = ${{ secrets.REVIEW_BOT_PORT }} >> review-bot-env.txt
+            echo REVIEW_BOT_DB_HOST = ${{ secrets.REVIEW_BOT_DB_HOST }} >> review-bot-env.txt
+            echo TELEGRAM_BOT_NAME = ${{ secrets.TELEGRAM_BOT_NAME }} >> review-bot-env.txt
+            echo TELEGRAM_BOT_TOKEN = ${{ secrets.TELEGRAM_BOT_TOKEN }} >> review-bot-env.txt
+            
+            echo LIFE_PAY_LOGIN = ${{ secrets.LIFE_PAY_LOGIN }} >> review-bot-env.txt
+            echo LIFE_PAY_KEY = ${{ secrets.LIFE_PAY_KEY }} >> review-bot-env.txt
                         
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker stop review-bot
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker rm review-bot
