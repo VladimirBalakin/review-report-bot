@@ -6,24 +6,25 @@ services:
     container_name: review-bot-db
     restart: always
     environment:
-      POSTGRES_DB: ${REVIEW_BOT_DB}:review_bot
-      POSTGRES_USER: ${REVIEW_BOT_DB_USER}:root
-      POSTGRES_PASSWORD: ${REVIEW_BOT_DB_PASSWORD}:root
+      POSTGRES_DB: review_bot
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
     ports:
       - "5436:5432"
 
   review-bot:
+    #build: ./
     image: vladimirbalakin933/review-bot:latest
     container_name: review-bot
     environment:
-      POSTGRES_DB: ${REVIEW_BOT_DB}:review_bot
-      POSTGRES_USER: ${REVIEW_BOT_DB}:review_bot
-      POSTGRES_PASSWORD: ${REVIEW_BOT_DB_PASSWORD}:root
-      TELEGRAM_BOT_NAME: ${TELEGRAM_BOT_NAME}:root
-      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}:root
+      POSTGRES_DB: ${REVIEW_BOT_DB:review_bot}
+      POSTGRES_USER: ${REVIEW_BOT_DB:root}
+      POSTGRES_PASSWORD: ${REVIEW_BOT_DB_PASSWORD:root}
+      TELEGRAM_BOT_NAME: ${TELEGRAM_BOT_NAME:JHomer}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:6027665356:AAHRi5AEmS6HuSU7iXXiE2OqwlD2Eq7Zz1E}
 
-      LIFE_PAY_LOGIN: ${LIFE_PAY_LOGIN}:test
-      LIFE_PAY_KEY: ${LIFE_PAY_KEY}:test
+      LIFE_PAY_LOGIN: ${LIFE_PAY_LOGIN:test}
+      LIFE_PAY_KEY: ${LIFE_PAY_KEY:test}
     ports:
       - "9100:8080"
     depends_on:

@@ -7,22 +7,22 @@ owner:
 
 
 server:
-  port: ${REVIEW_BOT_PORT:9100}
+  port: 9100
   host: "https://overridetech.ru/review-report-bot"
 
 reminders:
   maxDaysWithoutReport: 3
 
 pay-info:
-  login: ${LIFE_PAY_LOGIN}
-  apikey: ${LIFE_PAY_KEY}
+  login: ${LIFE_PAY_LOGIN:test}
+  apikey: ${LIFE_PAY_KEY:test}
   method: sbp
 
 spring:
   datasource:
-    password: ${POSTGRES_PASSWORD}
-    username: ${POSTGRES_USER}
-    url: jdbc:postgresql://${REVIEW_BOT_DB_HOST:localhost}:${REVIEW_BOT_DB_PORT:5432}/${REVIEW_BOT_DB:review_bot}
+    password: ${POSTGRES_PASSWORD:root}
+    username: ${POSTGRES_USER:root}
+    url: jdbc:postgresql://${REVIEW_BOT_DB_HOST:review-bot-db}:${REVIEW_BOT_DB_PORT:5432}/${REVIEW_BOT_DB:review_bot}
     driver-class-name: org.postgresql.Driver
 
   jpa:
