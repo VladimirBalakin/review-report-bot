@@ -7,7 +7,7 @@ owner:
 
 
 server:
-  port: 9100
+  port: 9001
   host: "https://overridetech.ru/review-report-bot"
 
 reminders:
