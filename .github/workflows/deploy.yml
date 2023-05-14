@@ -3,7 +3,7 @@ name: Build & Deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   push_compose:
@@ -18,7 +18,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          source: "docker-compose.yaml"
+          source: "docker-compose.yml"
           target: "/home/${{ secrets.SSH_USER }}"
           overwrite: true
 
@@ -35,10 +35,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Telegram Bot Build and Push to Dockerhub
+      - name: Review Bot Build and Push to Dockerhub
         uses: docker/build-push-action@v2
         with:
-          file: /review-report-bot-fork/Dockerfile
+          file: /Dockerfile
           push: true
           tags: vladimirbalakin933/review-bot
 
@@ -54,15 +54,20 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            echo TELEGRAM_BOT_DB_USER = ${{ secrets.TELEGRAM_BOT_DB_USER }} >> review-bot-env.txt
-            echo TELEGRAM_BOT_DB_PASSWORD = ${{ secrets.TELEGRAM_BOT_DB_PASSWORD }} >> review-bot-env.txt
-            echo TELEGRAM_BOT_DB_PORT = 5432 >> review-bot-env.txt
-            echo TELEGRAM_BOT_DB_HOST = telegram-bot-db >> review-bot-env.txt
+            echo REVIEW_BOT_DB = ${{ secrets.REVIEW_BOT_DB }} >> review-bot-env.txt
+            echo REVIEW_BOT_DB_USER = ${{ secrets.REVIEW_BOT_DB_USER }} >> review-bot-env.txt
+            echo REVIEW_BOT_DB_PASSWORD = ${{ secrets.REVIEW_BOT_DB_PASSWORD }} >> review-bot-env.txt
+            echo REVIEW_BOT_PORT = ${{ secrets.REVIEW_BOT_PORT }} >> review-bot-env.txt
+            echo REVIEW_BOT_DB_HOST = ${{ secrets.REVIEW_BOT_DB_HOST }} >> review-bot-env.txt
+            echo TELEGRAM_BOT_NAME = ${{ secrets.TELEGRAM_BOT_NAME }} >> review-bot-env.txt
             echo TELEGRAM_BOT_TOKEN = ${{ secrets.TELEGRAM_BOT_TOKEN }} >> review-bot-env.txt
+            
+            echo LIFE_PAY_LOGIN = ${{ secrets.LIFE_PAY_LOGIN }} >> review-bot-env.txt
+            echo LIFE_PAY_KEY = ${{ secrets.LIFE_PAY_KEY }} >> review-bot-env.txt
                         
-            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker stop review-bot
-            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker rm review-bot
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker stop review-bot-app
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker rm review-bot-app
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker rmi vladimirbalakin933/review-bot
-            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose -f docker-compose.yaml --env-file=review-bot-env.txt up -d
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose -f docker-compose.yml --env-file=review-bot-env.txt up -d
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker ps -a  
             rm review-bot-env.txt
