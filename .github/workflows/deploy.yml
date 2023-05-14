@@ -63,6 +63,6 @@ jobs:
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker stop review-bot
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker rm review-bot
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker rmi vladimirbalakin933/review-bot
-            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose -f docker-compose.yaml --env-file=review-bot-env.txt up -d
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose -f docker-compose.yml --env-file=review-bot-env.txt up -d
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker ps -a  
             rm review-bot-env.txt
