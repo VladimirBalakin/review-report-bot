@@ -22,7 +22,7 @@ spring:
   datasource:
     password: ${POSTGRES_PASSWORD:root}
     username: ${POSTGRES_USER:root}
-    url: jdbc:postgresql://${REVIEW_BOT_DB_HOST:review-bot-db}:${REVIEW_BOT_DB_PORT:5432}/${REVIEW_BOT_DB:review_bot}
+    url: jdbc:postgresql://${REVIEW_BOT_DB_HOST:review-bot-db}:5432/${REVIEW_BOT_DB:review_bot}
     driver-class-name: org.postgresql.Driver
 
   jpa:
