@@ -7,5 +7,5 @@ RUN mvn -B -f pom.xml clean package -DskipTests
 
 FROM openjdk:11-jdk-slim
 COPY --from=build /workspace/target/*.jar app.jar
-EXPOSE 9000
+EXPOSE 9001
 ENTRYPOINT ["java","-jar","app.jar"]
