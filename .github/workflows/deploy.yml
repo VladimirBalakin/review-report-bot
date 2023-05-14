@@ -38,7 +38,7 @@ jobs:
       - name: Review Bot Build and Push to Dockerhub
         uses: docker/build-push-action@v2
         with:
-          file: /review-bot/Dockerfile
+          file: /Dockerfile
           push: true
           tags: vladimirbalakin933/review-bot
 
