@@ -6,18 +6,19 @@ services:
     container_name: review-bot-db
     restart: always
     environment:
-      POSTGRES_DB: ${REVIEW_BOT_DB}:review_bot
-      POSTGRES_USER: ${REVIEW_BOT_DB_USER}:root
-      POSTGRES_PASSWORD: ${REVIEW_BOT_DB_PASSWORD}:root
+      POSTGRES_DB: ${REVIEW_BOT_DB}
+      POSTGRES_USER: ${REVIEW_BOT_DB_USER}
+      POSTGRES_PASSWORD: ${REVIEW_BOT_DB_PASSWORD}
     ports:
       - "5436:5432"
 
   review-bot:
+    #build: ./
     image: vladimirbalakin933/review-bot:latest
-    container_name: review-bot-app
+    container_name: review-bot
     environment:
-      POSTGRES_DB: review_bot
-      POSTGRES_USER: ${REVIEW_BOT_DB_USER}
+      POSTGRES_DB: ${REVIEW_BOT_DB}
+      POSTGRES_USER: ${REVIEW_BOT_DB}
       POSTGRES_PASSWORD: ${REVIEW_BOT_DB_PASSWORD}
       TELEGRAM_BOT_NAME: ${TELEGRAM_BOT_NAME}
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
