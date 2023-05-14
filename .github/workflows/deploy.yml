@@ -38,7 +38,7 @@ jobs:
       - name: Telegram Bot Build and Push to Dockerhub
         uses: docker/build-push-action@v2
         with:
-          file: /review-report-bot-fork/Dockerfile
+          file: /review-report-bot/Dockerfile
           push: true
           tags: vladimirbalakin933/review-bot
 
