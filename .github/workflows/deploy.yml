@@ -71,5 +71,5 @@ jobs:
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose -f docker-compose.yml --env-file=review-bot-env.txt up -d
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker ps -a  
             
-            review-bot-env.txt
+            rm review-bot-env.txt
             
